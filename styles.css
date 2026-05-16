@@ -1,0 +1,582 @@
+/* =============================================================================
+   BARNES LAB - Home Lab Portal Stylesheet
+   Version: 1.0.0
+   Author: Barnes Lab Development Team
+   
+   This stylesheet contains all styling for the Barnes Lab home lab portal,
+   featuring a futuristic cyberpunk/sci-fi aesthetic with neon accents and
+   smooth animations.
+   
+   Dependencies: None (pure CSS3)
+   Browser Support: Modern browsers (Chrome 90+, Firefox 85+, Safari 14+)
+============================================================================= */
+
+/* --- CSS Custom Properties (Design Tokens) ---------------------------------- */
+:root {
+    /* Primary Colors */
+    --primary: #00f5ff;           /* Cyan - main accent color */
+    --primary-dim: rgba(0, 245, 255, 0.1);
+    --primary-glow: rgba(0, 245, 255, 0.5);
+    
+    /* Secondary Colors */
+    --secondary: #ff00aa;         /* Magenta - secondary accent */
+    --secondary-dim: rgba(255, 0, 170, 0.1);
+    --secondary-glow: rgba(255, 0, 170, 0.5);
+    
+    /* Accent Colors */
+    --accent: #00aaff;            /* Blue accent */
+    --accent-dim: rgba(0, 170, 255, 0.1);
+    
+    /* Background Colors */
+    --bg-dark: #0a0a12;           /* Main dark background */
+    --bg-darker: #050508;         /* Even darker for contrast */
+    --panel-bg: rgba(10, 10, 18, 0.9);
+    
+    /* Text Colors */
+    --text-primary: #ffffff;      /* Main text */
+    --text-secondary: #a0a0b0;    /* Secondary/dimmed text */
+    --text-muted: #606070;        /* Muted text for less important content */
+    
+    /* Effects & Shadows */
+    --glow-primary: 0 0 20px var(--primary-glow);
+    --glow-secondary: 0 0 20px var(--secondary-glow);
+    --shadow-card: 0 8px 32px rgba(0, 0, 0, 0.4);
+    
+    /* Typography */
+    --font-display: 'Orbitron', sans-serif;      /* Headers & display text */
+    --font-body: 'Rajdhani', sans-serif;         /* Body text */
+    
+    /* Spacing Scale */
+    --space-xs: 0.5rem;   /* 8px */
+    --space-sm: 1rem;     /* 16px */
+    --space-md: 2rem;     /* 32px */
+    --space-lg: 3rem;     /* 48px */
+    --space-xl: 5rem;     /* 80px */
+    
+    /* Border Radius */
+    --radius-sm: 8px;
+    --radius-md: 16px;
+    --radius-lg: 24px;
+    --radius-round: 9999px;
+    
+    /* Transitions */
+    --transition-fast: 0.2s ease;
+    --transition-normal: 0.3s ease;
+    --transition-slow: 0.5s ease;
+}
+
+/* --- Reset & Base Styles ---------------------------------------------------- */
+*, *::before, *::after {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+    font-family: var(--font-body);
+    background-color: var(--bg-darker);
+    color: var(--text-primary);
+    min-height: 100vh;
+    overflow-x: hidden;
+    line-height: 1.6;
+    position: relative;
+}
+
+/* --- Background Elements ---------------------------------------------------- */
+.background {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: -1;
+    overflow: hidden;
+    pointer-events: none;
+}
+
+.grid-overlay {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    background-image: 
+        linear-gradient(rgba(0, 245, 255, 0.03) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(0, 245, 255, 0.03) 1px, transparent 1px);
+    background-size: 50px 50px;
+}
+
+.gradient-orb {
+    position: absolute;
+    border-radius: 50%;
+    filter: blur(80px);
+    opacity: 0.3;
+    animation: float 20s infinite ease-in-out;
+}
+
+.orb-1 {
+    width: 400px;
+    height: 400px;
+    background: var(--primary);
+    top: -100px;
+    left: -100px;
+    animation-delay: 0s;
+}
+
+.orb-2 {
+    width: 500px;
+    height: 500px;
+    background: var(--secondary);
+    bottom: -150px;
+    right: -150px;
+    animation-delay: -7s;
+}
+
+.orb-3 {
+    width: 300px;
+    height: 300px;
+    background: var(--accent);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation-delay: -14s;
+}
+
+@keyframes float {
+    0%, 100% { 
+        transform: translate(0, 0) scale(1); 
+    }
+    25% { 
+        transform: translate(30px, -30px) scale(1.1); 
+    }
+    50% { 
+        transform: translate(-20px, 20px) scale(0.9); 
+    }
+    75% { 
+        transform: translate(20px, 10px) scale(1.05); 
+    }
+}
+
+/* --- Layout & Container ----------------------------------------------------- */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: var(--space-lg) var(--space-md);
+    position: relative;
+}
+
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-md) var(--space-sm);
+    }
+}
+
+/* --- Header & Logo ---------------------------------------------------------- */
+header {
+    text-align: center;
+    padding: var(--space-xl) var(--space-sm) var(--space-lg);
+    animation: fadeInDown 1s ease-out;
+}
+
+.logo-container {
+    display: inline-block;
+    margin-bottom: var(--space-md);
+    cursor: pointer;
+}
+
+.logo-icon {
+    font-size: clamp(3rem, 8vw, 5rem);
+    text-shadow: var(--glow-primary);
+    animation: pulse 3s infinite ease-in-out;
+    transition: transform var(--transition-fast);
+}
+
+.logo-icon:hover {
+    animation: glitch 0.3s infinite;
+}
+
+h1 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 5vw, 4rem);
+    font-weight: 900;
+    letter-spacing: 6px;
+    text-transform: uppercase;
+    background: linear-gradient(135deg, 
+        var(--primary) 0%, 
+        #ffffff 50%, 
+        var(--secondary) 100%);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    margin-bottom: var(--space-sm);
+    animation: glowText 4s infinite alternate;
+}
+
+.tagline {
+    font-size: clamp(0.9rem, 2vw, 1.3rem);
+    color: var(--text-secondary);
+    letter-spacing: 3px;
+    text-transform: uppercase;
+}
+
+/* --- Section Titles --------------------------------------------------------- */
+.section-title {
+    font-family: var(--font-display);
+    text-align: center;
+    font-size: clamp(0.9rem, 2vw, 1.4rem);
+    color: var(--primary);
+    letter-spacing: 3px;
+    margin-bottom: var(--space-lg);
+    text-transform: uppercase;
+}
+
+.status-dot {
+    display: inline-block;
+    width: 10px;
+    height: 10px;
+    border-radius: var(--radius-round);
+    background: #00ff88;
+    margin-right: 6px;
+    animation: pulseDot 2s infinite ease-in-out;
+}
+
+.status-label {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* --- Clock Cards ------------------------------------------------------------ */
+.clock-section {
+    margin: var(--space-lg) auto;
+    animation: fadeInUp 1s ease-out 0.3s both;
+}
+
+.clocks-container {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: var(--space-md);
+    padding: var(--space-sm);
+}
+
+.time-zone-card {
+    background: var(--panel-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--space-lg) var(--space-md);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+    transition: all var(--transition-normal);
+    border: 1px solid rgba(0, 245, 255, 0.2);
+    cursor: pointer;
+}
+
+.time-zone-card::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    height: 3px;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+}
+
+.time-zone-card:hover {
+    transform: translateY(-8px);
+    box-shadow: var(--glow-primary), var(--shadow-card);
+    border-color: var(--primary);
+}
+
+.timezone-label {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    color: var(--text-secondary);
+    letter-spacing: 2px;
+    margin-bottom: var(--space-sm);
+    text-transform: uppercase;
+}
+
+.timezone-label .icon {
+    display: inline-block;
+    margin-right: 6px;
+    font-size: 1.3rem;
+}
+
+.clock-display {
+    font-family: var(--font-display);
+    font-size: clamp(1.8rem, 4vw, 2.8rem);
+    color: var(--text-primary);
+    text-shadow: var(--glow-primary);
+    margin-bottom: var(--space-xs);
+}
+
+.date-display {
+    font-family: var(--font-body);
+    font-size: clamp(0.85rem, 1.4vw, 1.1rem);
+    color: var(--text-secondary);
+    letter-spacing: 1px;
+}
+
+.date-display span {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* --- Content Cards ---------------------------------------------------------- */
+.welcome-section {
+    margin-top: var(--space-xl);
+    animation: fadeInUp 1s ease-out 0.6s both;
+}
+
+.content-card {
+    background: var(--panel-bg);
+    border-radius: var(--radius-lg);
+    padding: var(--space-xl) var(--space-lg);
+    position: relative;
+    overflow: hidden;
+    border: 1px solid rgba(0, 245, 255, 0.3);
+}
+
+.content-card::after {
+    content: '';
+    position: absolute;
+    bottom: -60px;
+    right: -60px;
+    width: 250px;
+    height: 250px;
+    background: var(--secondary);
+    border-radius: 50%;
+    filter: blur(120px);
+    opacity: 0.3;
+}
+
+.welcome-section h2 {
+    font-family: var(--font-display);
+    font-size: clamp(1.4rem, 3vw, 2.4rem);
+    color: var(--primary);
+    margin-bottom: var(--space-md);
+    text-transform: uppercase;
+    letter-spacing: 3px;
+}
+
+.welcome-section p {
+    font-size: clamp(0.95rem, 1.7vw, 1.2rem);
+    color: var(--text-secondary);
+    line-height: 1.9;
+    margin-bottom: var(--space-sm);
+}
+
+.highlight-text {
+    color: var(--primary);
+    font-weight: 600;
+}
+
+/* --- Features Grid ---------------------------------------------------------- */
+.features-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(240px, 1fr));
+    gap: var(--space-md);
+    margin-top: var(--space-lg);
+}
+
+.feature-item {
+    background: rgba(0, 245, 255, 0.05);
+    border-radius: var(--radius-sm);
+    padding: var(--space-md);
+    text-align: center;
+    transition: all var(--transition-normal);
+    border: 1px solid transparent;
+}
+
+.feature-item:hover {
+    background: rgba(0, 245, 255, 0.1);
+    border-color: var(--primary);
+    transform: translateY(-6px);
+    box-shadow: var(--shadow-card);
+}
+
+.feature-icon {
+    font-size: 2.3rem;
+    margin-bottom: var(--space-sm);
+    display: block;
+}
+
+.feature-title {
+    font-family: var(--font-display);
+    font-size: 1.05rem;
+    color: var(--text-primary);
+    margin-bottom: var(--space-xs);
+    letter-spacing: 1.5px;
+}
+
+.feature-desc {
+    font-size: 0.9rem;
+    color: var(--text-secondary);
+}
+
+/* --- Footer ----------------------------------------------------------------- */
+footer {
+    text-align: center;
+    padding: var(--space-xl) var(--space-sm) var(--space-lg);
+    margin-top: var(--space-xl);
+    border-top: 1px solid rgba(0, 245, 255, 0.2);
+    animation: fadeInUp 1s ease-out 0.9s both;
+}
+
+.footer-text {
+    color: var(--text-secondary);
+    font-size: clamp(0.75rem, 1vw, 0.9rem);
+    letter-spacing: 2px;
+}
+
+/* --- Animations ------------------------------------------------------------- */
+@keyframes fadeInDown {
+    from {
+        opacity: 0;
+        transform: translateY(-30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes fadeInUp {
+    from {
+        opacity: 0;
+        transform: translateY(30px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes glowText {
+    from { 
+        text-shadow: 0 0 20px rgba(0, 245, 255, 0.3), 
+                     0 0 40px rgba(0, 245, 255, 0.2);
+    }
+    to { 
+        text-shadow: 0 0 30px rgba(0, 245, 255, 0.6), 
+                     0 0 60px rgba(0, 245, 255, 0.4);
+    }
+}
+
+@keyframes pulse {
+    0%, 100% { 
+        transform: scale(1); 
+        opacity: 1;
+    }
+    50% { 
+        transform: scale(1.05); 
+        opacity: 0.8;
+    }
+}
+
+@keyframes pulseDot {
+    0%, 100% { 
+        opacity: 1; 
+        box-shadow: 0 0 6px #00ff88;
+    }
+    50% { 
+        opacity: 0.5; 
+        box-shadow: 0 0 3px #00ff88;
+    }
+}
+
+@keyframes glitch {
+    0%, 100% { transform: translate(0); }
+    25% { transform: translate(-2px, 2px); }
+    50% { transform: translate(2px, -2px); }
+    75% { transform: translate(-2px, -2px); }
+}
+
+/* --- Cursor & Typing Effects ----------------------------------------------- */
+.cursor-blink {
+    display: inline-block;
+    width: 3px;
+    height: 1em;
+    background: var(--primary);
+    margin-left: 4px;
+    animation: blink 1s infinite;
+    vertical-align: middle;
+}
+
+@keyframes blink {
+    0%, 50% { opacity: 1; }
+    51%, 100% { opacity: 0; }
+}
+
+/* --- Responsive Design ------------------------------------------------------ */
+@media (max-width: 768px) {
+    .container {
+        padding: var(--space-md) var(--space-sm);
+    }
+    
+    header {
+        padding: var(--space-lg) var(--space-sm) var(--space-md);
+    }
+    
+    h1 {
+        letter-spacing: 4px;
+    }
+    
+    .content-card {
+        padding: var(--space-lg) var(--space-md);
+    }
+    
+    .clocks-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-sm);
+    }
+}
+
+/* --- Print Styles ----------------------------------------------------------- */
+@media print {
+    .background, .gradient-orb, .grid-overlay {
+        display: none !important;
+    }
+    
+    body {
+        background: white;
+        color: #000;
+    }
+    
+    h1 {
+        background: none;
+        -webkit-text-fill-color: currentColor;
+        color: #000;
+    }
+}
+
+/* --- Reduced Motion --------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+    *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+    }
+}
+
+/* --- Focus Styles (Accessibility) ------------------------------------------- */
+.time-zone-card:focus-visible,
+.logo-container:focus-visible {
+    outline: 2px solid var(--primary);
+    outline-offset: 4px;
+}
+
+/* --- High Contrast Mode Support --------------------------------------------- */
+@media (prefers-contrast: high) {
+    :root {
+        --text-secondary: #d0d0e0;
+        --panel-bg: rgba(15, 15, 25, 0.95);
+    }
+}
+
+/* =============================================================================
+   END OF STYLESHEET
+============================================================================= */
