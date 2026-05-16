@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Barnes Lab - Home Lab Portal</title>
+    
+    <!-- Preconnect to Google Fonts for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@400;500;700;900&family=Rajdhani:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <!-- External Stylesheet -->
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <!-- Background Elements -->
+    <div class="background">
+        <div class="grid-overlay"></div>
+        <div class="gradient-orb orb-1"></div>
+        <div class="gradient-orb orb-2"></div>
+        <div class="gradient-orb orb-3"></div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Header -->
+        <header>
+            <div class="logo-container" id="logo">
+                <span class="logo-icon">⚡</span>
+            </div>
+            <h1>BARNES LAB</h1>
+            <p class="tagline">Home Lab Portal<span class="cursor-blink"></span></p>
+        </header>
+
+        <!-- Clock Section -->
+        <section class="clock-section" id="clocks">
+            <h2 class="section-title"><span class="status-dot"></span><span class="status-label">Live Time Synchronization</span></h2>
+            
+            <div class="clocks-container">
+                <!-- Zulu Time (UTC) -->
+                <div class="time-zone-card" data-timezone="utc">
+                    <div class="timezone-label">
+                        <span class="icon">🌍</span>Zulu Time (UTC)
+                    </div>
+                    <div class="clock-display" id="zulu-clock">--:--:--</div>
+                    <div class="date-display">
+                        <span id="zulu-date">Loading...</span>
+                    </div>
+                </div>
+
+                <!-- Mountain Time -->
+                <div class="time-zone-card" data-timezone="mountain">
+                    <div class="timezone-label">
+                        <span class="icon">🏔️</span>Mountain Time (MT)
+                    </div>
+                    <div class="clock-display" id="mountain-clock">--:--:--</div>
+                    <div class="date-display">
+                        <span id="mountain-date">Loading...</span>
+                    </div>
+                </div>
+
+                <!-- East Coast Time (Eastern) -->
+                <div class="time-zone-card" data-timezone="eastern">
+                    <div class="timezone-label">
+                        <span class="icon">🏙️</span>East Coast (ET)
+                    </div>
+                    <div class="clock-display" id="eastern-clock">--:--:--</div>
+                    <div class="date-display">
+                        <span id="eastern-date">Loading...</span>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Welcome Section -->
+        <section class="welcome-section" id="about">
+            <div class="content-card">
+                <h2>Welcome to Barnes Lab</h2>
+                <p>
+                    You've arrived at the digital gateway of my <span class="highlight-text">home lab environment</span>. 
+                    This is where curiosity meets experimentation, and ideas transform into working systems.
+                </p>
+                <p>
+                    A home lab represents more than just a collection of computers and networking gear — it's a sandbox for learning, 
+                    testing new technologies, developing skills, and pushing the boundaries of what's possible with modern infrastructure.
+                    Whether I'm experimenting with virtualization, building custom services, or exploring automation, this space serves as my personal technology playground.
+                </p>
+                <p>
+                    The systems you see here are part of an evolving ecosystem designed for practical experimentation and knowledge sharing. 
+                    From network services to application hosting, from monitoring solutions to automation tools — every component has a purpose in the pursuit of technical mastery.
+                </p>
+
+                <!-- Features Grid -->
+                <div class="features-grid">
+                    <div class="feature-item">
+                        <span class="feature-icon">🖥️</span>
+                        <h3 class="feature-title">Infrastructure</h3>
+                        <p class="feature-desc">Virtualization, containers, and networking experiments</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔧</span>
+                        <h3 class="feature-title">Automation</h3>
+                        <p class="feature-desc">Scripts, tools, and workflow optimization</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">📊</span>
+                        <h3 class="feature-title">Monitoring</h3>
+                        <p class="feature-desc">System health, metrics, and observability</p>
+                    </div>
+                    <div class="feature-item">
+                        <span class="feature-icon">🔒</span>
+                        <h3 class="feature-title">Security</h3>
+                        <p class="feature-desc">Hardening, testing, and best practices</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Footer -->
+        <footer id="footer">
+            <p class="footer-text">BARNES LAB — BUILDING THE FUTURE, ONE PROJECT AT A TIME</p>
+            <p class="footer-text" style="margin-top: 15px; font-size: 0.8rem;">Last updated: <span id="last-updated">2026</span></p>
+        </footer>
+    </div>
+
+    <!-- External JavaScript -->
+    <script src="scripts.js"></script>
+</body>
+</html>
